@@ -1,0 +1,44 @@
+<div class="registration-container">
+  <div class="registration-card">
+    <div class="welcome-text">
+      <h2>Welcome to Wordle!</h2>
+      <p>Enter your name to start playing</p>
+    </div>
+    
+    <form (ngSubmit)="submitUsername()" class="registration-form">
+      <div class="input-group">
+        <input 
+          type="text" 
+          [(ngModel)]="username" 
+          name="username" 
+          placeholder="Enter your name"
+          required
+          minlength="2"
+          maxlength="20"
+          #nameInput="ngModel"
+          [class.invalid]="nameInput.invalid && nameInput.touched"
+        >
+        @if (nameInput.invalid && nameInput.touched) {
+          <div class="error-message">
+            @if (nameInput.errors?.['required']) {
+              Name is required
+            } @else if (nameInput.errors?.['minlength']) {
+              Name must be at least 2 characters
+            } @else if (nameInput.errors?.['maxlength']) {
+              Name must be less than 20 characters
+            }
+          </div>
+        }
+      </div>
+      
+      <button 
+        type="submit" 
+        [disabled]="nameInput.invalid"
+        class="submit-button"
+      >
+        Start Playing
+        <span class="material-icons">arrow_forward</span>
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="keyboard">
+  @for (row of rows; track row) {
+    <div class="keyboard-row">
+      @for (key of row; track key) {
+        <button 
+          [class]="getKeyClass(key)"
+          (click)="onKeyClick(key)"
+        >
+          @if (key === 'Backspace') {
+            <span class="material-icons">backspace</span>
+          } @else {
+            {{ key }}
+          }
+        </button>
+      }
+    </div>
+  }
+</div> 
