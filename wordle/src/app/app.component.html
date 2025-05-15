@@ -1,0 +1,40 @@
+<div class="game-container">
+  <header>
+    <h1>Wordle: Welcome {{ username() }}</h1>
+    <div class="game-status">
+      @if (errorMessage()) {
+        <p class="error-message">{{errorMessage()}}</p>
+      }
+      @if (isGameCreated()) {
+        <p class="attempts">Attempts: {{ historicFeedbacks().length }}/6</p>
+      }
+    </div>
+  </header>
+
+  <main>
+    @if (userId() === "") {
+      <app-registration-form (nameSubmitted)="register($event)"></app-registration-form>
+    }
+
+    @else if(!isGameCreated()) {
+      <div class="new-game">
+        <button class="new-game-btn" (click)="createNewGame()">Start New Game</button>
+      </div>
+    }
+
+    @if (isGameCreated()) {
+      <div class="game-board">
+        @for (_ of historicGuesses; track $index) {
+          <app-guess-input 
+            (wordInputted)="submitGuess($event, $index)" 
+            [feedbacks]="getSplitFeedbackFor($index)"
+          />
+        }
+      </div>
+      <app-keyboard 
+        [letterStates]="letterStates()"
+        (keyPress)="handleKeyPress($event)"
+      ></app-keyboard>
+    }
+  </main>
+</div>

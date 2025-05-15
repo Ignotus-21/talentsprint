@@ -1,0 +1,34 @@
+<form #test>
+    @for (_ of guessLetters; track $index; let idx=$index) {        <input #guessInput type="text" size="1" maxlength="1"
+  [name]="'guess' + idx"
+  [disabled]="disabledInTypeScript"
+  (keypress)="focusToNextInput($event)"
+  [classList]="[decideClassFromFeedback(idx)]"
+  [ngModel]="guessLetters[idx]()"
+  (ngModelChange)="guessLetters[idx].set($event)"
+  [autofocus]="autofocus && idx === 0" />
+    }
+    <button type="submit" (click)="$event.preventDefault(); submitGuess()" [disabled]="disabledInTypeScript">Submit</button>
+</form>
+
+@if (showKeyboard) {
+  <div class="virtual-keyboard">
+    <div class="keyboard-row">
+      @for (key of row1; track key) {
+        <button (click)="handleKeyPress(key)">{{ key }}</button>
+      }
+    </div>
+    <div class="keyboard-row">
+      @for (key of row2; track key) {
+        <button (click)="handleKeyPress(key)">{{ key }}</button>
+      }
+    </div>
+    <div class="keyboard-row">
+      <button (click)="handleKeyPress('ENTER')">ENTER</button>
+      @for (key of row3; track key) {
+        <button (click)="handleKeyPress(key)">{{ key }}</button>
+      }
+      <button (click)="handleKeyPress('⌫')">⌫</button>
+    </div>
+  </div>
+}

@@ -1,0 +1,19 @@
+<h1>Wordle: Welcome {{ username() }}</h1>
+<p style="color: red;">{{errorMessage()}}</p>
+@if (userId() === "") {
+    <app-registration-form (nameSubmitted)="register($event)"></app-registration-form>
+}
+
+@else if(!isGameCreated()) {
+    <button (click)="createNewGame()">Create new game!</button>
+}
+
+@if (isGameCreated()) {
+  @for (_ of historicGuesses; track $index; let last = $last) {
+    <app-guess-input
+      (wordInputted)="submitGuess($event, $index)"
+      [feedbacks]="getSplitFeedbackFor($index)"
+      [showKeyboard]="last"
+      [autofocus]="last" />
+  }
+}

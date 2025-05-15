@@ -1,0 +1,24 @@
+{
+    "responses": [
+        {
+            "feedback": "YYYRR",
+            "message": "5 guesses left"
+        },
+        {
+            "feedback": "RYGYR",
+            "message": "4 guesses left"
+        },
+        {
+            "feedback": "RRGGY",
+            "message": "3 guesses left"
+        },
+        {
+            "feedback": "GYGGR",
+            "message": "2 guesses left"
+        },
+        {
+            "feedback": "GGGGG",
+            "message": "1 guess left"
+        }
+    ]
+}

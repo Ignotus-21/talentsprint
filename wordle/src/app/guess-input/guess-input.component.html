@@ -1,0 +1,7 @@
+
+<form #test>
+    @for (_ of guessLetters; track $index; let idx=$index) {
+        <input type="text" size="1" maxlength="1" [name]="'guess' + idx"  [disabled]="disabledInTypeScript" (keypress)="focusToNextInput($event)" [classList]="[decideClassFromFeedback(idx)]" [(ngModel)]="guessLetters[idx]">
+    }
+    <button type="submit" (click)="submitGuess()" [disabled]="disabledInTypeScript">Submit</button>
+</form>
